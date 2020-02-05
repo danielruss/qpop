@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <script>
+            function lessThan(a,b){
+                return a<b;
+            }
+            function greaterThan(a,b){
+                return a>b;
+            }
+            function c2(element){ 
+                console.log(element.parentElement.control)
+                element.parentElement.control.checked=true;
+                console.log( [ ...element.parentElement.querySelectorAll('input["type=\'radio\'"]')] );
+
+                console.log(element)
+                console.log( element.parentElement.parentElement )
+            }
+
+            const knownFunctions=[ "lessThan", "greaterThan"];
+            function next(element){
+                currentElement = element.parentElement
+                nextElement = currentElement.nextElementSibling;
+                console.log(currentElement,nextElement);
+                if (nextElement.hasAttribute("displayif")){
+                    let call=nextElement.getAttribute("displayif");
+                    let capture = call.match(/^(\w+)\((\w+),(\w+)\)/)
+
+                    let functionName = capture[1];
+                    let variable = document.getElementById(capture[2]).value;
+                    let x = capture[3];
+
+                    if (knownFunctions.includes(functionName) && !isNaN(x) && !isNaN(variable) ){
+                        let f = Function("return "+capture[1]+"("+variable+","+capture[3]+")" );
+                        console.log("should I display the next question? " + f())
+                        // if the displayif is false, return the next element...
+                        if (!f()){
+                            currentElement.classList.remove("active")
+                            let nextNorp = nextElement.querySelector("input[value='next']")
+                            console.log(nextNorp)
+                            if (nextNorp){
+                                return(next(nextNorp))
+                            }
+                        }
+                    }                    
+                }
+
+                currentElement.classList.remove("active")
+                nextElement.classList.add("active");
+            }
+        </script>
+        <style>
+            .question {
+                display: none;
+            }
+            .question.active{
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="Q1NK" class="question active">
+          How many children do you have <input type="number" id="numkids"></input>
+          <input type="button" value="next" onclick=next(this)></input>
+        </form>
+        <form id=QKIDA1 class="question" displayif="greaterThan(numkids,0)">
+            How old is your oldest child <input type="number" id="age1"></input>
+            <input type="button" value="next" onclick=next(this)></input>
+        </form>
+        <form id=QKIDA2 class="question" displayif="greaterThan(numkids,1)">
+            How old is your next oldest child <input type="number" id="age2"></input>
+            <input type="button" value="next" onclick=next(this)></input>
+        </form>
+        <form id=QKIDA3 class="question" displayif="greaterThan(numkids,2)">
+            How old is your next oldest child <input type="number" id="age3"></input>
+            <input type="button" value="next" onclick=next(this)></input>
+        </form>
+        <form id=QKIDA4 class="question" displayif="greaterThan(numkids,3)">
+            How old is your next oldest child <input type="number" id="age4"></input>
+            <input type="button" value="next" onclick=next(this)></input>
+        </form>
+
+        <form class="question">
+            Thank you for taking the survey...
+        </form>
+    </body>
+</html>

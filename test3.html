@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="test3.js"></script>
+    <script>
+        let questionQueue = new Tree(null)
+        questionQueue.add("Q1")
+        questionQueue.next()
+        questionQueue.addChildren(["Q2"])
+        questionQueue.next();
+        questionQueue.addChildren(["Q5","Q6","Q8"]);
+        questionQueue.next();
+        questionQueue.next();
+        questionQueue.next();
+    </script>
+</head>
+<body>
+    <div>
+        <div id="Q1">This is question one</div>
+        <input id="x1" type="checkbox"></input>
+        <label for="x1">answer 1</label>
+        <input id="x2" type="checkbox"></input>
+        <label for="x2">answer 2</label>
+        <input id="x3" type="checkbox"></input>
+        <label for="x3">answer 3</label>
+        <input id="x4" type="checkbox"></input>
+        <label for="x4">answer 4</label>
+        <button onclick="nextFunction(this)">next</button>
+    </div>
+
+</body>
+
+</html>
