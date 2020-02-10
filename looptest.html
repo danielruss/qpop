@@ -1,11 +1,244 @@
 <head>
+  <script>
+    const res = {};
 
+    function clearSelection() {}
+
+    function callFilter(x) {
+      return (x.type == "checkbox" && x.checked) || x.type == "text";
+    }
+
+    function getResults(element) {
+      // clear old results or create a blank object in the results to
+      // hold these results...
+      res[element.id] = {};
+      // when we add to the tmpRes object, only the correct
+      // object in the results are touched...
+      let tmpRes = res[element.id];
+
+      let allResponses = [...element.querySelectorAll(".response")];
+      // get all the checkboxes
+      cb = allResponses
+        .filter(x => x.type == "checkbox")
+        .map(x => (tmpRes[x.value] = x.checked));
+
+      // get all the text and radio elements...
+      rd = allResponses
+        .filter(
+          x =>
+            (x.type == "radio" && x.checked) ||
+            ["text", "date", "email", "number", "tel"].includes(x.type)
+        )
+        .map(x => (tmpRes[x.name] = x.value));
+    }
+    
+    function next(element) {
+      console.log("question: " + element.id);
+    }
+  </script>
 </head>
 <body>
-  <form id="QSib">
+  <form
+    id="QSib"
+    action="javascript:getResults(document.getElementById('QSib'))"
+    method="post"
+  >
     How many siblings do you have, including full and half-siblings?
-    <input type="number" id="siblings"></input>
-    <button onclick="next()" type="submit"></button>
+    <label for="rbQSIB">
+      <input type="radio" id="rbQSIB" name="lalala" />
+      <input type="number" name="siblings" class="response" />
+    </label>
+
+    <input type="submit" />
+    <input onclick="next(this.form)" type="button" value="next" />
+  </form>
+
+  <form
+    id="Q2"
+    action="javascript:getResults(document.getElementById('Q2'))"
+    method="POST"
+  >
+    What's your favorite pet....<br />
+    <input
+      type="checkbox"
+      id="Q2_1"
+      name="Q2"
+      value="1"
+      class="response"
+    />cat<br />
+    <input
+      type="checkbox"
+      id="Q2_2"
+      name="Q2"
+      value="2"
+      class="response"
+    />dog<br />
+    <input
+      type="checkbox"
+      id="Q2_3"
+      name="Q2"
+      value="3"
+      class="response"
+    />bird<br />
+    <input type="submit" />
+    <input onclick="next(this.form)" type="button" value="next" />
+  </form>
+
+  <form
+    id="Q2A"
+    action="javascript:getResults(document.getElementById('Q2A'))"
+    method="POST"
+  >
+    What is your birth date?
+    <input type="date" name="Q2DATE" class="response" />
+    <input type="submit" />
+  </form>
+
+  <form
+    id="Q3"
+    action="javascript:getResults(document.getElementById('Q3'))"
+    method="POST"
+  >
+    Which categories describe you? Select all that apply. Note, you may select
+    more than one group.<br /><br /><input
+      type="checkbox"
+      name="RACEETH"
+      value="1"
+      id="RACEETH_1"
+      onclick="clearSelection(this)"
+      skipto="RACEETH2"
+      class="response"
+    /><label style="font-weight: normal; padding-left:5px" for="RACEETH_1">
+      American Indian or Alaska Native</label
+    ><br /><br /><input
+      type="checkbox"
+      name="RACEETH"
+      value="2"
+      id="RACEETH_2"
+      onclick="clearSelection(this)"
+      skipto="RACEETH3"
+      class="response"
+    /><label style="font-weight: normal; padding-left:5px" for="RACEETH_2">
+      Asian</label
+    ><br /><br /><input
+      type="checkbox"
+      name="RACEETH"
+      value="3"
+      id="RACEETH_3"
+      onclick="clearSelection(this)"
+      skipto="RACEETH4"
+      class="response"
+    /><label style="font-weight: normal; padding-left:5px" for="RACEETH_3">
+      Black, African American, or African</label
+    ><br /><br /><input
+      type="checkbox"
+      name="RACEETH"
+      value="4"
+      id="RACEETH_4"
+      onclick="clearSelection(this)"
+      skipto="RACEETH5"
+      class="response"
+    /><label style="font-weight: normal; padding-left:5px" for="RACEETH_4">
+      Hispanic, Latino, or Spanish</label
+    ><br /><br /><input
+      type="checkbox"
+      name="RACEETH"
+      value="5"
+      id="RACEETH_5"
+      onclick="clearSelection(this)"
+      skipto="RACEETH6"
+      class="response"
+    /><label style="font-weight: normal; padding-left:5px" for="RACEETH_5">
+      Middle Eastern or North African</label
+    ><br /><br /><input
+      type="checkbox"
+      name="RACEETH"
+      value="6"
+      id="RACEETH_6"
+      onclick="clearSelection(this)"
+      skipto="RACEETH7"
+      class="response"
+    /><label style="font-weight: normal; padding-left:5px" for="RACEETH_6">
+      Native Hawaiian or other Pacific Islander</label
+    ><br /><br /><input
+      type="checkbox"
+      name="RACEETH"
+      value="7"
+      id="RACEETH_7"
+      onclick="clearSelection(this)"
+      skipto="RACEETH8"
+      class="response"
+    /><label style="font-weight: normal; padding-left:5px" for="RACEETH_7">
+      White
+    </label>
+    <br /><br /><input
+      type="checkbox"
+      name="RACEETH"
+      value="8"
+      id="RACEETH_8"
+      onclick="clearSelection(this)"
+      class="response"
+    />
+    <label style="font-weight: normal; padding-left:5px" for="RACEETH_8">
+      None of these fully describe me: Please describe
+
+      <input type="radio" id="rb" name="RACEETH" />
+      <input
+        id=""
+        type="text"
+        name="RACEETH"
+        oninput="document.getElementById('rb').checked = this.value.length > 0 "
+        class="response"
+      />
+    </label>
+    <br /><br />
+    <input
+      type="checkbox"
+      name="RACEETH"
+      value="99"
+      id="RACEETH_99"
+      onclick="clearSelection(this)"
+      class="response"
+    />
+    <label style="font-weight: normal; padding-left:5px" for="RACEETH_99">
+      Prefer not to answer</label
+    ><br />
+    <input
+      type="hidden"
+      id="RACEETH_default"
+      name="RACEETH"
+      skipto="LANG"
+      checked=""
+    />
+    <input type="submit" />
+  </form>
+
+  <form
+    id="Q4"
+    action="javascript:getResults(document.getElementById('Q4'))"
+    method="POST"
+  >
+    Do you have feet?
+    <input type="radio" name="feet" value="1" class="response" /> yes
+    <input type="radio" name="feet" value="0" class="response" /> no
+    <input type="submit" />
+  </form>
+  <form
+    id="Q5"
+    action="javascript:getResults(document.getElementById('Q5'))"
+    method="POST"
+  >
+    what's your e-mail?
+    <input type="email" name="useremail" class="response" />
+    <input type="submit" />
+  </form>
+  <form
+    id="Q6"
+    action="javascript:getResults(document.getElementById('Q6'))"
+    method="POST"
+  >
+    what's your phone number?
+    <input type="tel" name="userphone" class="response" />
+    <input type="submit" />
   </form>
 </body>
-

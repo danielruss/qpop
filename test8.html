@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script>
+      function qparser() {
+        let x = document.getElementById("inp").value;
+        let regEx = new RegExp(
+          "\\[[A-Z_][A-Z0-9_#]*[\\?\\!]?\\]|<loop>",
+          "msg"
+        );
+
+        x.s;
+        document.getElementById("res").innerHTML = x;
+        console.log("in qparser...", x);
+      }
+    </script>
+    <body>
+      <textarea id="inp"></textarea>
+      <input type="button" onclick="qparser()" value="click me" />
+      <div id="res"></div>
+    </body>
+  </head>
+</html>

@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="test10.js"></script>
+  </head>
+  <body>
+    <div padding="10" id="d1"></div>
+    <div padding="10" id="d2"></div>
+
+    <script>
+      var txt = `
+      [Q1] This is question one.   (1) yes (2) no
+[Q2] This is question two.   (1) yes (2) no
+<loop max=2>
+[Q3!] Skip to question 5.
+   (1) yes -> Q5
+   (2) no 
+[Q4] This is question four.  (1) yes (2) no
+[Q5] This is question five. (1) yes (2) no
+</loop>
+[Q6] This is question six. (1) yes (2) no
+<loop max=3>
+[Q7?] Skip to question 9.
+   (1) yes -> Q9
+   (2) no 
+[Q8] This is question eight.  (1) yes (2) no
+[Q9] This is question nine. (1) yes (2) no
+</loop>
+[Q10] This is question ten. (1) yes (2) no`;
+      document.getElementById("d1").innerText = unrollLoops(txt);
+      document.getElementById("d2").innerText = unrollLoops("[Q1] Hi there");
+    </script>
+  </body>
+</html>
