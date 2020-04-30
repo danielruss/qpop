@@ -1,0 +1,22 @@
+<html>
+  <head> </head>
+  <body>
+    <script>
+      var myPromise = new Promise((resolve, reject) => {
+        var z = [...Array(10000000).keys()].map(x => Math.sqrt(x));
+        resolve(z.length);
+      });
+      var prom2 = new Promise((resolve, reject) => {
+        var z2 = [...Array(1000).keys()].map(x => Math.sqrt(x));
+        resolve(z2.length);
+      });
+
+      myPromise
+        .then(successMessage => console.log("YES!!! " + successMessage))
+        .then(() => {
+          console.log("then...");
+        })
+        .then(prom2.then(successMessage => console.log("YES 2!!! " + successMessage)));
+    </script>
+  </body>
+</html>

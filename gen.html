@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <script>
+      function* myGen100k() {
+        var x = [...Array(100000).keys()].sort(function(a, b) {
+          return 0.5 - Math.random();
+        });
+        document.getElementById("outbox").innerHTML = x;
+        var indx = 0;
+        while (indx < x.length) yield x[indx++];
+      }
+    </script>
+  </head>
+  <body>
+    <div id="outbox" style="white-space: pre;"></div>
+  </body>
+  <script>
+    var gen = myGen100k();
+    console.log(
+      gen
+        .next()
+        .value.toString()
+        .padStart(5, "0")
+    );
+    console.log(
+      gen
+        .next()
+        .value.toString()
+        .padStart(5, "0")
+    );
+    console.log(
+      gen
+        .next()
+        .value.toString()
+        .padStart(5, "0")
+    );
+    console.log(
+      gen
+        .next()
+        .value.toString()
+        .padStart(5, "0")
+    );
+    console.log(
+      gen
+        .next()
+        .value.toString()
+        .padStart(5, "0")
+    );
+    console.log(
+      gen
+        .next()
+        .value.toString()
+        .padStart(5, "0")
+    );
+  </script>
+</html>

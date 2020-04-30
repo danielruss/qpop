@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="ast.js"></script>
+    <input type="hidden" id="name" value="bob" />
+    <input type="hidden" id="sex" value="3" />
+  </head>
+  <body>
+    <form>
+      What is your favorite animal?
+      <input type="text" value="" id="FavAnimal" />
+    </form>
+    <form>
+      What did you eat for lunch
+      <input type="text" value="" id="lunch" />
+    </form>
+    <form>
+      What is the first vowel in the alphabet?
+      <input type="text" value="a" id="c" />
+      <input
+        type="button"
+        onclick="parse('or(equals(FavAnimal,dog),equals(lunch,sushi))')"
+      />
+    </form>
+    <form>
+      How old are you?
+      <input type="number" value="" id="age" />
+      <input
+        type="button"
+        onclick="parse('and(greaterThanOrEqual(age,21),lessThanOrEqual(sex,2))')"
+      />
+    </form>
+  </body>
+</html>

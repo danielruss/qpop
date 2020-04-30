@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Mocha Tests</title>
+    <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
+    <link rel="stylesheet" href="mycss.css"
+  </head>
+  <body>
+    <div id="quest"></div>
+
+    <script src="tree.js"></script>
+    <script src="myquest.js"></script>
+    <script src="onemoretry.js"></script>
+
+    <!--  this is my unit testing -->
+    <p></p>
+    <hr />
+    <div id="mocha"></div>
+    <script src="https://unpkg.com/chai/chai.js"></script>
+    <script src="https://unpkg.com/mocha/mocha.js"></script>
+
+    <script class="mocha-init">
+      mocha.setup("bdd");
+      mocha.checkLeaks();
+    </script>
+    <script src="test.enc.js"></script>
+    <script class="mocha-exec">
+      mocha.run();
+    </script>
+    <!-- end of unit testing -->
+  </body>
+</html>
